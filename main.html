@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home - My Website</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #a8e0ff 0%, #70cad1 40%, #003366 100%);
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: Georgia, serif;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            background: white;
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        nav {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #004080;
+            font-weight: bold;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .grid img {
+            width: 150px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="#main">Skip to Main Content</a>
+
+    <header>
+        <h1>Welcome to the Site</h1>
+        <nav>
+            <a href="main.html">Home</a> |
+            <a href="about.html">About</a> |
+            <a href="contact.html">Contact</a>|
+            <a href="index.html">Back</a>
+        </nav>
+    </header>
+
+    <main id="main">
+        <p>me fr</p>
+        <img src="image.png" alt="isaac">
+    </main>
+
+    <footer>
+        <p>J.O.B</p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome broskis!!!</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      width: 100%;
+      background: linear-gradient(135deg, #a8e0ff 0%, #70cad1 40%, #003366 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Georgia, serif;
+      overflow: hidden;
+    }
+
+    
+    /* Card */
+    .card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 48px 44px 44px;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(255, 100, 150, 0.2), 0 2px 8px rgba(0,0,0,0.06);
+      width: min(420px, 88vw);
+      position: relative;
+      z-index: 1;
+      animation: pop 0.5s ease forwards;
+    }
+
+    @keyframes pop {
+      0%   { transform: scale(0.8); opacity: 0; }
+      60%  { transform: scale(1.1); }
+      100% { transform: scale(1);   opacity: 1; }
+    }
+
+    .question {
+      font-size: clamp(22px, 5vw, 28px);
+      color: #c0306a;
+      font-weight: bold;
+      margin-bottom: 32px;
+      line-height: 1.4;
+    }
+
+    /* YES button */
+    .yes-btn {
+      background: linear-gradient(135deg, #ff6b9d, #ff4777);
+      color: white;
+      border: none;
+      padding: 14px 52px;
+      border-radius: 50px;
+      font-size: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(255, 75, 119, 0.45);
+      letter-spacing: 1px;
+      animation: heartbeat 2s ease-in-out infinite;
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
+    }
+
+    .yes-btn:hover {
+      box-shadow: 0 6px 26px rgba(255, 75, 119, 0.6);
+      transform: scale(1.06);
+      animation: none;
+    }
+
+    .yes-btn:active { transform: scale(0.97); }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.05); }
+    }
+
+    /* NO button */
+    .no-btn {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      background: transparent;
+      color: #c06080;
+      border: 2px solid #f0a0b8;
+      padding: 8px 22px;
+      border-radius: 50px;
+      font-size: 15px;
+      cursor: pointer;
+      white-space: nowrap;
+      z-index: 100;
+      user-select: none;
+      transition: left 0.12s ease, top 0.12s ease, border-color 0.2s;
+      font-family: Georgia, serif;
+    }
+
+    .no-btn:hover { border-color: #ff6b9d; }
+
+  </style>
+</head>
+<body>
+
+ 
+
+  <!-- Card -->
+  <div class="card" id="card">
+    <div id="ask">
+      <p class="question">Lets take a look around shall we?</p>
+      <button class="yes-btn" onclick="showMain()">Sure lil bro</button>
+    </div>
+    
+    <script>
+      function showMain() {
+        window.location.href = "main.html";
+      }
+    </script>
+
+
+  <!-- NO button -->
+  <button class="no-btn" id="noBtn" onmouseenter="runAway()" ontouchstart="runAway()" onclick="runAway()">
+    NO 
+  </button>
+
+  <script>
+    const noMessages = ["nah"];
+    let msgIndex = 0;
+    const BTN_W = 120;
+    const BTN_H = 44;
+    const PADDING = 16;
+    const CARD_MARGIN = 24;
+
+    function runAway() {
+      const noBtn = document.getElementById('noBtn');
+      const card = document.getElementById('card');
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const r = card.getBoundingClientRect();
+
+      const cardRect = {
+        left:   r.left   - CARD_MARGIN,
+        top:    r.top    - CARD_MARGIN,
+        right:  r.right  + CARD_MARGIN,
+        bottom: r.bottom + CARD_MARGIN,
+      };
+
+      let x, y, overlaps, attempts = 0;
+      do {
+        x = PADDING + Math.random() * (vw - BTN_W - PADDING * 2);
+        y = PADDING + Math.random() * (vh - BTN_H - PADDING * 2);
+        overlaps =
+          x + BTN_W > cardRect.left &&
+          x         < cardRect.right &&
+          y + BTN_H > cardRect.top  &&
+          y         < cardRect.bottom;
+        attempts++;
+      } while (overlaps && attempts < 50);
+
+      noBtn.style.left   = x + 'px';
+      noBtn.style.top    = y + 'px';
+      noBtn.style.right  = 'auto';
+      noBtn.style.bottom = 'auto';
+
+      msgIndex = (msgIndex + 1) % noMessages.length;
+      noBtn.textContent = noMessages[msgIndex];
+    }
+
+    function sayYes() {
+      document.getElementById('ask').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+      document.getElementById('noBtn').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
